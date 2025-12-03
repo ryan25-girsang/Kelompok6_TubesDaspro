@@ -108,19 +108,23 @@ void inputKegiatan() {
 
 // ---------------------- LIST KEGIATAN ----------------------
 void listKegiatan() {
+    printf(BLUE "================================================================================"RESET);
     printf(BLUE "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ DAILY HABIT TRACKER ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" RESET);
-    printf(CYAN"No | Nama Kegiatan | Hari & Tanggal | Jam | Durasi | Deadline | Keterangan | Status\n"RESET);
+    printf(BLUE "================================================================================\n\n"RESET);
+
+    // Setting lebar kolom
+    printf(CYAN "%-4s %-20s %-25s %-10s %-12s %-20s %-4s\n" RESET,
+           "No", "Nama Kegiatan", "Hari & Tanggal", "Jam", "Durasi", "Deadline", "Keterangan");
 
     for (int i = 0; i < jumlah; i++) {
-        printf("%d | %s | %s | %s | %s | %s | %s | %s\n\n",
+        printf("%-4d %-20s %-25s %-10s %-12s %-20s %-10s\n",
                i + 1,
                list[i].nama,
                list[i].hariTanggal,
                list[i].jam,
                list[i].durasi,
                list[i].deadline,
-               list[i].keterangan,
-               list[i].selesai ? "Selesai" : "Belum");
+               list[i].keterangan);
     }
 }
 
