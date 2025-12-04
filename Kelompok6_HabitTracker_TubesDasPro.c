@@ -107,24 +107,44 @@ void inputKegiatan() {
 
 // ---------------------- LIST KEGIATAN ----------------------
 void listKegiatan() {
+    if (jumlah == 0) {
+        printf(RED "\nBelum ada kegiatan. Silakan tambah kegiatan terlebih dahulu!\n" RESET);
+        return;
+    }
+
     printf(BLUE "================================================================================"RESET);
     printf(BLUE "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ DAILY HABIT TRACKER ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" RESET);
     printf(BLUE "================================================================================\n\n"RESET);
 
-    // Setting lebar kolom
-    printf(CYAN "%-4s %-20s %-25s %-10s %-12s %-20s %-4s\n" RESET,
-           "No", "Nama Kegiatan", "Hari & Tanggal", "Jam", "Durasi", "Deadline", "Keterangan");
+    // Setting lebar kolom dengan status
+    printf(CYAN "%-4s %-20s %-15s %-8s %-10s %-15s %-20s %-8s\n" RESET,
+           "No", "Nama Kegiatan", "Hari & Tanggal", "Jam", "Durasi", "Deadline", "Keterangan", "Status");
+    
+    printf("--------------------------------------------------------------------------------\n");
 
     for (int i = 0; i < jumlah; i++) {
-        printf("%-4d %-20s %-25s %-10s %-12s %-20s %-10s\n",
-               i + 1,
-               list[i].nama,
-               list[i].hariTanggal,
-               list[i].jam,
-               list[i].durasi,
-               list[i].deadline,
-               list[i].keterangan);
+        // Tampilkan dengan status selesai/belum
+        if (list[i].selesai) {
+            printf(GREEN "%-4d %-20s %-15s %-8s %-10s %-15s %-20s [SELESAI]\n" RESET,
+                   i + 1,
+                   list[i].nama,
+                   list[i].hariTanggal,
+                   list[i].jam,
+                   list[i].durasi,
+                   list[i].deadline,
+                   list[i].keterangan);
+        } else {
+            printf("%-4d %-20s %-15s %-8s %-10s %-15s %-20s [ ]\n",
+                   i + 1,
+                   list[i].nama,
+                   list[i].hariTanggal,
+                   list[i].jam,
+                   list[i].durasi,
+                   list[i].deadline,
+                   list[i].keterangan);
+        }
     }
+    printf("\n");
 }
 
 // ---------------------- CHECKLIST ----------------------
@@ -134,7 +154,6 @@ void checklist() {
 
     printf(YELLOW"\nPilih nomor kegiatan yang ingin ditandai selesai: "RESET);
     scanf("%d", &done);
-    getchar();
     done--;
 
     if (done < 0 || done >= jumlah) {
@@ -146,6 +165,7 @@ void checklist() {
     save();
     printf(GREEN "Kegiatan berhasil ditandai selesai!\n" RESET);
 }
+
 
 // ---------------------- EDIT KEGIATAN ----------------------
 void editKegiatan() {
