@@ -74,8 +74,7 @@ void inputKegiatan() {
         return;
     }
 
-    getchar();
-    printf(MAGENTA "Masukkan Nama Kegiatan      : " RESET);
+    printf(MAGENTA "\nMasukkan Nama Kegiatan      : " RESET);
     fgets(list[jumlah].nama, sizeof(list[jumlah].nama), stdin);
     list[jumlah].nama[strcspn(list[jumlah].nama, "\n")] = 0;
 
@@ -135,6 +134,7 @@ void checklist() {
 
     printf(YELLOW"\nPilih nomor kegiatan yang ingin ditandai selesai: "RESET);
     scanf("%d", &done);
+    getchar();
     done--;
 
     if (done < 0 || done >= jumlah) {
@@ -225,6 +225,7 @@ void hapusKegiatan() {
     int delete;
     printf(YELLOW"\nMasukkan nomor kegiatan yang ingin dihapus: "RESET);
     scanf("%d", &delete);
+    getchar();
     delete--;
 
     if (delete < 0 || delete >= jumlah) {
@@ -241,18 +242,18 @@ void hapusKegiatan() {
     printf(GREEN "Kegiatan berhasil dihapus!\n" RESET);
 }
 
-// ---------------------- MENU ----------------------
-void menu() {
+
+int main() {
     read();
     int pilihan;
     do {
         printf(BLUE"\n===== HABIT TRACKER =====\n"RESET);
-        printf(WHITE"1. Tambah Kegiatan\n"RESET);
-        printf(WHITE"2. Lihat List Kegiatan\n"RESET);
-        printf(WHITE"3. Tandai Selesai\n"RESET);
-        printf(WHITE"4. Edit Kegiatan\n"RESET);
-        printf(WHITE"5. Hapus Kegiatan\n"RESET);
-        printf(WHITE"0. Keluar\n"RESET);
+        printf(WHITE"1. Tambah Kegiatan\n");
+        printf("2. Lihat List Kegiatan\n");
+        printf("3. Tandai Selesai\n");
+        printf("4. Edit Kegiatan\n");
+        printf("5. Hapus Kegiatan\n");
+        printf("0. Keluar\n"RESET);
         printf(GREEN"\nSilahkan pilih : "RESET);
         scanf("%d", &pilihan);
         getchar();
@@ -266,10 +267,9 @@ void menu() {
             case 0: printf(RED"Keluar...\n"RESET); break;
             default: printf(RED "Pilihan tidak valid!\n" RESET);
         }
-    } while (pilihan != 0);
-}
+    } 
+    
+    while (pilihan != 0);
 
-int main() {
-    menu();
     return 0;
 }
